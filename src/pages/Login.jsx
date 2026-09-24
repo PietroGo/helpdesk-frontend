@@ -22,9 +22,9 @@ async function handleSubmit(event) {
     setError(''); // Limpa o erro antes de tentar fazer login
   
     try {
-        const data = await login(email, password); // Chama a função de login do serviço de autenticação
-        console.log('Login bem-sucedido:', data); // Exibe o token JWT no console
-        localStorage.setItem('token', data.token); // Armazena o token JWT no localStorage
+        const token = await login(email, password); // Chama a função de login do serviço de autenticação
+        console.log('Login bem-sucedido:', token); // Exibe o token JWT no console
+        localStorage.setItem('token', token); // Armazena o token JWT no localStorage
         navigate('/tickets'); // Redireciona para a página de tickets após o login bem-sucedido
 
     } catch (error) { 
