@@ -1,11 +1,19 @@
+// useState é um hook do React que permite adicionar estado a componentes funcionais
 import { useState } from 'react'
 
+// useNavigate é um hook do React Router que permite navegar programaticamente entre rotas
+import { useNavigate } from 'react-router-dom'
+
+// login é uma função que faz a requisição de login para o backend
 import { login } from '../services/authService'
 
 function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+
+// useNavigate é um hook do React Router que permite navegar programaticamente entre rotas
+  const navigate = useNavigate()
 
 // Função para lidar com o envio do formulário de login
 async function handleSubmit(event) {  
@@ -16,7 +24,9 @@ async function handleSubmit(event) {
     try {
         const data = await login(email, password); // Chama a função de login do serviço de autenticação
         console.log('Login bem-sucedido:', data); // Exibe o token JWT no console
-        // Aqui você pode redirecionar o usuário para outra página ou armazenar o token em algum lugar seguro
+        localStorage.setItem('token', data.token); // Armazena o token JWT no localStorage
+        navigate('/tickets'); // Redireciona para a página de tickets após o login bem-sucedido
+
     } catch (error) { 
         setError(error.message)
     }
