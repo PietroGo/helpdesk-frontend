@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { getTickets } from '../services/ticketService'
+import { Link } from 'react-router-dom'
 
 function TicketList() {
      // Estado para armazenar os tickets vindo da API
@@ -40,13 +41,15 @@ function TicketList() {
     return (
         <div>
             <h1>Lista de Tickets</h1>
-            <u>
+            <ul>
                 {tickets.map(ticket => (
                     <li key={ticket.id}>
-                        <strong>{ticket.title}</strong> - {ticket.status} - {ticket.priority}
+                        <Link to={`/tickets/${ticket.id}`}> {/* Link para a página de detalhes do ticket */}
+                            <strong>{ticket.title}</strong> - {ticket.status} - {ticket.priority}
+                        </Link>
                     </li>
                 ))}
-            </u>
+            </ul>
         </div>
     );
 }

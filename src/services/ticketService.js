@@ -30,3 +30,43 @@ const data = await response.json();
 
   return data
 }
+
+// Busca um ticket específico pelo ID
+export async function getTicketById(id) {
+  const token = localStorage.getItem('token')
+
+  const response = await fetch(`${API_URL}/tickets/${id}`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error('Erro ao buscar ticket');
+  }
+
+  const data = await response.json();
+  return data;
+}
+
+// Adiciona um comentário a um ticket específico
+export async function addComment(ticketId, message) {
+  const token = localStorage.getItem('token');
+
+  const response = await fetch(`${API_URL}/tickets/${ticketId}/comments`, {
+    method: 'POST',
+    headers: {  
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify({ message })
+  });
+
+  if (!response.ok) {
+    throw new Error('Erro ao adicionar comentário');
+  }
+
+  const data = await response.json();
+  return data;
+}
