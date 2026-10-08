@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 // useParams: pega parâmetros da URL
 import { useParams } from "react-router-dom";
 import { getTicketById, addComment } from "../services/ticketService";
+import LogoutButton from "../components/LogoutButton";
 
 function TicketDetail() {
   // Pega o parâmetro "id" da URL
@@ -64,6 +65,7 @@ function TicketDetail() {
       <p><strong>Status:</strong> {ticket.status}</p>
       <p><strong>Descrição:</strong> {ticket.description}</p>
       <p><strong>Prioridade:</strong> {ticket.priority}</p>
+      <LogoutButton />
 
       <h2>Comentários</h2>
       <ul>

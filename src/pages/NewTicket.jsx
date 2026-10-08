@@ -4,6 +4,7 @@ import { useState } from 'react';
 // useNavigate : permite redirecionar o usuário para outra página após a criação do ticket
 import { useNavigate } from 'react-router-dom';
 import { createTicket } from '../services/ticketService';
+import LogoutButton from '../components/LogoutButton';
 
 function NewTicket() {
   const [title, setTitle] = useState('');
@@ -31,6 +32,7 @@ async function handleSubmit(event) {
 return (
     <div>
         <h1>Criar Novo Ticket</h1>
+        <LogoutButton />
         <form onSubmit={handleSubmit}>
             <div>
                 <label>Título:</label>

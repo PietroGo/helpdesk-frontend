@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { getTickets } from '../services/ticketService'
 import { Link } from 'react-router-dom'
+import LogoutButton from '../components/LogoutButton'
 
 function TicketList() {
      // Estado para armazenar os tickets vindo da API
@@ -41,6 +42,7 @@ function TicketList() {
     return (
         <div>
             <h1>Lista de Tickets</h1>
+            <LogoutButton />
             <Link to={`/tickets/new`}>Criar Novo Ticket</Link>
             <ul>
                 {tickets.map(ticket => (
