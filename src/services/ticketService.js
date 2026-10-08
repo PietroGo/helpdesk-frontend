@@ -1,6 +1,29 @@
 //URL base da API backend
 const API_URL = 'http://localhost:3000'
 
+// Função para criar um novo ticket
+export async function createTicket(ticketData) {
+  const token = localStorage.getItem('token');
+
+  const response = await fetch(`${API_URL}/tickets`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify(ticketData) // transforma o objeto ticketData em uma string JSON para enviar no corpo da requisição
+  });
+
+  //se a resposta não for bem-sucedida, lança um erro
+  if (!response.ok) {
+    throw new Error('Erro ao criar ticket');
+  }
+
+  //retorna os dados do ticket criado em formato JSON
+  const data = await response.json();
+  return data;
+}
+
 // Função para buscar todos os tickets
 export async function getTickets() {
   
@@ -8,7 +31,7 @@ export async function getTickets() {
 // Obtém o token JWT do localStorage
   const token = localStorage.getItem('token') 
 
-  console.log('Token JWT:', token) // Exibe o token JWT no console para depuração
+//console.log('Token JWT:', token) // Exibe o token JWT no console para depuração
 
 // Faz a requisição para a API backend para buscar os tickets, incluindo o token JWT no cabeçalho Authorization
   const response = await fetch(`${API_URL}/tickets`, {

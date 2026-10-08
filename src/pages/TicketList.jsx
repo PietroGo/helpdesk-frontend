@@ -41,6 +41,7 @@ function TicketList() {
     return (
         <div>
             <h1>Lista de Tickets</h1>
+            <Link to={`/tickets/new`}>Criar Novo Ticket</Link>
             <ul>
                 {tickets.map(ticket => (
                     <li key={ticket.id}>
