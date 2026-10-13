@@ -93,3 +93,24 @@ export async function addComment(ticketId, message) {
   const data = await response.json();
   return data;
 }
+
+
+export async function updateTicketStatus(ticketId, status) {
+  const token = localStorage.getItem('token');
+
+  const response = await fetch(`${API_URL}/tickets/${ticketId}/status`, {
+    method: 'PATCH',
+    headers: {
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify({ status })
+  });
+
+  if (!response.ok) {
+    throw new Error('Erro ao atualizar status do ticket');
+  }
+
+  const data = await response.json();
+  return data;
+}
