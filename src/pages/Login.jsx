@@ -32,30 +32,39 @@ async function handleSubmit(event) {
     }
 }
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
+    // container centraliza e limita a largura, card dá o visual de caixa
+    <div className="container">
+      <div className="card">
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit}>
+           {/* .field empilha label e campo */}
+          <div className="field">
+            <label htmlFor="email">Email:</label>
+            {/* id precisa ser igual ao htmlFor do label para associar o label ao input */}
+            <input
             type="email"
+            id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div>
+        <div className="field">
           <label htmlFor="senha">Senha:</label>
           <input
+            id="senha"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+        {/* className="error" aplica estilo de erro, e só é exibido se houver erro */}
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">Entrar</button>
+        <button type="submit" className="btn">
+          Entrar
+        </button>
       </form>
+    </div>
     </div>
   );
 }
-
 export default Login;

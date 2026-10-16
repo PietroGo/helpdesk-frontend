@@ -1,111 +1,83 @@
+/* Variaveis globais */
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  --color-bg: #f4f6fb;          /* fundo da página */
+  --color-surface: #ffffff;     /* fundo dos cartões */
+  --color-text: #1f2937;        /* texto principal */
+  --color-muted: #6b7280;       /* texto secundário */
+  --color-primary: #2563eb;     /* azul dos botões */
+  --color-primary-hover: #1d4ed8;
+  --color-danger: #dc2626;      /* vermelho dos erros */
+  --color-border: #e5e7eb;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-body {
-  margin: 0;
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+* {
   box-sizing: border-box;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+body {
+  margin: 0;                            /* Tira a margem padrão do navegador */
+  font-family: system-ui, sans-serif;   /* fonte do sistema, rápida e limpa */
+  background-color: var(--color-bg);    /* var() usa uma as variáveis globais definidas no :root */
+  color: var(--color-text);
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
+/* Centraliza o conteúdo e limita a largura em telas grande */
+.container {
+  max-width: 720px;
+  margin: 0 auto;        /* auto nas laterais centraliza o bloco */
+  padding: 24px 16px;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+/* Cartão branco com borda arredondada */
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 16px;
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+/* Agrupa label + campo, um embaixo do outro */
+.field {
+  display: flex;
+  flex-direction: column;/* empilha os elementos verticalmente */
+  gap: 6px;              /* espaço entre label e campo */
+  margin-bottom: 16px;   /* espaço entre campos */
+}
+
+.field label {
+  font-size: 14px;
+  color: var(--color-muted);
+}
+
+/* Estilo comum a todos os campos de formulário */
+input, textarea, select {
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font: inherit; /* herda a fonte do body */
+  outline: none; /* remove a borda azul do navegador */
+}
+
+/* Destaque quando o campo está seleicionado */
+input:focus, textarea:focus, select:focus {
+  border-color: var(--color-primary);
+  outline: 2px solid var(--color-primary-hover);
+}
+
+.btn {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font: inherit;
+  cursor: pointer; /* muda o cursor para indicar que é clicável */
+}
+
+.btn:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.error {
+  color: var(--color-danger);
 }
