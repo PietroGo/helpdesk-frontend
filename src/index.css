@@ -81,3 +81,56 @@ input:focus, textarea:focus, select:focus {
 .error {
   color: var(--color-danger);
 }
+
+/* Cabeçalho da página: titulo à esquerda, botões à direita */
+.page-header {
+  display: flex;
+  justify-content: space-between; /* espaço entre os elementos */
+  align-items: center;            /* alinha verticalmente */
+  margin-bottom: 16px;
+}
+
+/* Lista sem bolinhas e sem recuo */
+.ticket-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* espaço entre os itens da lista */
+}
+
+.ticket-item {
+  display: block; /* faz o link ocupar o cartão inteiro e empurrar os vizinhos */
+  text-decoration: none;  /* tira o sublinhado */
+  color: inherit;         /* tira o roxo/azul de link */
+}
+
+.ticket-item:hover {
+  background-color: var(--color-bg); /* destaca a borda ao passar o mouse */
+  cursor: pointer;
+}
+
+/* Etiqueta pequena e arredondada, usada para status e prioridade */
+.badge {
+  display: inline-block;
+  border-radius: 999px; /* valor alto deixa as pontas totalmente redondas*/
+  padding: 2px 10px;
+  font-size: 12px;
+  background: var(--color-border);
+}
+
+/* Etiqueta pequena e arredondada, usada para status e prioridade */
+.badge{
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  background:var(--color-border);
+}
+
+/* Faz o Link com className="btn" ficar igual ao botão */
+a.btn {
+  text-decoration: none;  /* tira o sublinado do link */
+  display: inline-block;  /*permite aplicar padding como num botão */
+}

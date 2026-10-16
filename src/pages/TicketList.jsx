@@ -40,15 +40,25 @@ function TicketList() {
     }
 
     return (
-        <div>
+        <div className='container'>
+            <div className='page-header'>
             <h1>Lista de Tickets</h1>
+            <div>
+            <Link className='btn' to="/tickets/new">Criar Novo Ticket</Link>
+            {''}
             <LogoutButton />
-            <Link to={`/tickets/new`}>Criar Novo Ticket</Link>
-            <ul>
+            </div>
+         </div>
+            <ul className="ticket-list">
                 {tickets.map(ticket => (
                     <li key={ticket.id}>
-                        <Link to={`/tickets/${ticket.id}`}> {/* Link para a página de detalhes do ticket */}
-                            <strong>{ticket.title}</strong> - {ticket.status} - {ticket.priority}
+                        <Link className='card ticket-item' to={`/tickets/${ticket.id}`}> {/* Link para a página de detalhes do ticket */}
+                            <strong>{ticket.title}</strong>
+                            {''}
+                            {/* badge: etiqueta arredonada pequena */}
+                            <span className='badge' >{ticket.status}</span> 
+                            {''}
+                            <span className='badge' >{ticket.priority}</span>
                         </Link>
                     </li>
                 ))}

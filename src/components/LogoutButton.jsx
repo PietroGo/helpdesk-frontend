@@ -9,7 +9,7 @@ function LogoutButton() {
 
     }
 
-    return <button onClick={handleLogout}>Desconectar</button>;
+    return <button className="btn" onClick={handleLogout}>Desconectar</button>;
 }
 
 export default LogoutButton;
