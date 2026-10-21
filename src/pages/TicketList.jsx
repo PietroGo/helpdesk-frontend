@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { getTickets } from '../services/ticketService'
 import { Link } from 'react-router-dom'
 import LogoutButton from '../components/LogoutButton'
+import { statusLabels, priorityLabels } from '../utils/labels'
 
 function TicketList() {
      // Estado para armazenar os tickets vindo da API
@@ -56,9 +57,9 @@ function TicketList() {
                             <strong>{ticket.title}</strong>
                             {''}
                             {/* badge: etiqueta arredonada pequena */}
-                            <span className='badge' >{ticket.status}</span> 
+                            <span className='badge' >{statusLabels[ticket.status]}</span> 
                             {''}
-                            <span className='badge' >{ticket.priority}</span>
+                            <span className='badge' >{priorityLabels[ticket.priority]}</span>
                         </Link>
                     </li>
                 ))}

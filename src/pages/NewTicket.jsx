@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 // useNavigate : permite redirecionar o usuário para outra página após a criação do ticket
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { createTicket } from '../services/ticketService';
 import LogoutButton from '../components/LogoutButton';
 
@@ -30,31 +30,41 @@ async function handleSubmit(event) {
 }
 
 return (
-    <div>
+    <div className='container'>
+        <div className='page-header'>
         <h1>Criar Novo Ticket</h1>
-        <LogoutButton />
+        <div className='actions'>
+            <Link className='btn btn-secondary' to="/tickets"> ←voltar </Link>
+            <LogoutButton />
+             </div>      
+        </div>
+
+        <div className='card'>
         <form onSubmit={handleSubmit}>
-            <div>
-                <label>Título:</label>
+            <div className='field'>
+                <label htmlFor='Titulo'>Título:</label>
                 <input
+                    id='titulo'
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     required // o navegador impede o envio do formulário se o campo estiver vazio
                 />
             </div>
-            <div>
-                <label>Descrição:</label>
+            <div className='field'>
+                <label htmlFor='descrição'>Descrição:</label>
                 <textarea
+                    id='descricao'
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     required
                 />
             </div>
-            <div>
-                <label>Prioridade:</label>
+            <div className='field'>
+                <label htmlFor='Prioridade'>Prioridade:</label>
                 {/* Os valores precisam ser exatamente os do enum Priority do backend */}
                 <select
+                    id='prioridade'
                     value={priority}
                     onChange={(e) => setPriority(e.target.value)}
                 >
@@ -63,9 +73,10 @@ return (
                     <option value="ALTA">Alta</option>
                 </select>
             </div>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <button type="submit">Criar Ticket</button>
+            {error && <p className= "error">{error} </p>}
+            <button type="submit" className='btn'>Criar Ticket</button>
         </form>
+    </div>
     </div>
  )
 }

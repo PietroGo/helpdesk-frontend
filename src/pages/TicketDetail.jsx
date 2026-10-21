@@ -2,10 +2,11 @@
 // useEffect: roda código quando o componente é exibido
 import { useState, useEffect } from "react";
 // useParams: pega parâmetros da URL
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getTicketById, addComment, updateTicketStatus } from "../services/ticketService";
 import LogoutButton from "../components/LogoutButton";
 import { getUserRole } from "../services/authService";
+import { statusLabels, priorityLabels } from "../utils/labels";
 
 function TicketDetail() {
   // Pega o parâmetro "id" da URL
@@ -77,48 +78,65 @@ function TicketDetail() {
   if (!ticket) { return <p>Ticket não encontrado.</p> } // proteção extra
 
   return (
-    <div>
+    <div className="container">
+    <div className="page-header">
       <h1>Detalhes do Ticket</h1>
-      <p><strong>Status:</strong> {ticket.status}</p>
+      <div className="actions">
+        <Link className="btn btn-secondary" to="/tickets"> ←voltar</Link>
+        <LogoutButton />
+      </div>
+    </div>    
+    
+    <div className="card">
+      <h2>{ticket.title}</h2>
+      <p>
+        <span className="badge">{statusLabels[ticket.status]}</span>{' '}
+        <span className="badge">{priorityLabels[ticket.priority]}</span>
+      </p>
+
+      <p>{ticket.description}</p>
 
       {isAdmin && (
-        <div>
-          <label>Alterar status:</label>
+        <div className="field">
+          <label htmlFor="Alterar Status" >Alterar status:</label>
           {/* value={ticket.status}: o seletor sempre mostra o status atual do ticket
               onChange: dispara a função handleStatusChange quando o usuário muda o valor do seletor */}
 
-          <select value={ticket.status} onChange={handleStatusChange}>
-            {/* Os valores do seletor são os mesmos que a API espera ('ABERTO', 'EM_PROGRESSO', 'FECHADO') */}
+          <select id="Alterar status" value={ticket.status} onChange={handleStatusChange}>
+            {/* Os valores do seletor são os mesmos que a API espera ('ABERTO', 'EM_ANDAMENTO', 'FECHADO') */}
             <option value="ABERTO">Aberto</option>
             <option value="EM_ANDAMENTO">Em Andamento</option>
             <option value="RESOLVIDO">Resolvido</option>
             <option value="FECHADO">Fechado</option>
           </select>
-          {statusError && <p style={{ color: 'red' }}>{statusError}</p>}
+          {statusError && <p className="error">{statusError}</p>}
         </div>
       )}
-
-      <p><strong>Descrição:</strong> {ticket.description}</p>
-      <p><strong>Prioridade:</strong> {ticket.priority}</p>
-      <LogoutButton />
-
+      </div>
+      <div className="card section">
       <h2>Comentários</h2>
-      <ul>
+      {ticket.comments.length === 0 && <p>Nenhum comentário ainda.</p>}
+      
+      <ul className="comment-list">
         {ticket.comments.map((comment) => (
-          <li key={comment.id}>{comment.message}</li>
+          <li className="comment" key={comment.id}>{comment.message}</li>
         ))}
       </ul>
 
-      <h3>Adicionar Comentário</h3>
-      <form onSubmit={handleAddComment}>
+      <form className="section" onSubmit={handleAddComment}>
+        <div className="field">
+          <label htmlFor="comentario">Novo comentário:</label>
         <textarea
+          id="comentario"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Digite seu comentário..."
         />
-        <button type="submit">Adicionar Comentário</button>
+      </div>
+        <button type="submit" className="btn">Adicionar Comentário</button>
       </form>
     </div>
+  </div>
   )
 }
 
