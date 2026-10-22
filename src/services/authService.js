@@ -37,3 +37,23 @@ export function getUserRole() {
         return null;
     }
 }
+
+
+// Cadastra uma empresa nova junto com o usuário admin dela
+// Recebe um objeto com nome, email, password, companyName e cnpj
+export async function register(userData) {
+    const response = await fetch(`${API_URL}/auth/register`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': "application/json"
+        },
+        body: JSON.stringify(userData) // o objeto já tem exatamente os campos que o backend espera
+    });
+
+    if (!response.ok){
+        // Tenta ler a mensagem de erro que o backend mandou, e usa uma genérica se não houver
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Erro ao criar conta');
+    }
+    return await response.json();
+}

@@ -179,3 +179,14 @@ textarea{
   background: var(--color-bg);
 }
 
+
+/* Texto pequeno com links, embaixo dos formulário */
+.form-links {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--color-muted);
+}
+
+.form-links a {
+  color: var(--color-primary);
+}

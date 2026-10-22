@@ -2,10 +2,11 @@
 import { useState } from 'react'
 
 // useNavigate é um hook do React Router que permite navegar programaticamente entre rotas
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 // login é uma função que faz a requisição de login para o backend
 import { login } from '../services/authService'
+
 
 function Login() {
   const [email, setEmail] = useState('')
@@ -63,6 +64,9 @@ async function handleSubmit(event) {
           Entrar
         </button>
       </form>
+      <p className='form-links'>
+        Não tem conta? <Link to="/register">Criar conta</Link>
+      </p>
     </div>
     </div>
   );
