@@ -65,7 +65,7 @@ async function handleSubmit(event) {
         </button>
       </form>
       <p className='form-links'>
-        Não tem conta? <Link to="/register">Criar conta</Link>
+        Não tem conta? <Link to="/register">Criar conta</Link>  <Link to="/forgot-password">Esqueceu a senha ?</Link>
       </p>
     </div>
     </div>

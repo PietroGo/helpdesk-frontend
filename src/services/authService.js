@@ -57,3 +57,39 @@ export async function register(userData) {
     }
     return await response.json();
 }
+
+// Pede ao backend para gerar o token de recuperação para esse email
+export async function forgotPassword(email) {
+    const response = await fetch(`${API_URL}/auth/forgot-password`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({ email })
+    });
+
+    if (!response.ok) {
+        // Usa a mensagem do backend quando existir, e uma genérica se não vier em JSON
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error (errorData.error || 'Erro ao solicitar recuperação de senha'); 
+    }
+
+    return await response.json();
+    
+}
+
+
+// Troca a senha usando o token que veio no link
+export async function resetPassword(token, newPassword) {
+    const response = await fetch(`${API_URL}/auth/reset-password`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        // O backend espera exatamente os campos "token" e "newPassword"
+        body: JSON.stringify({ token, newPassword})
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Erro ao redefinir senha');
+    }
+    
+    return await response.json();
+}
